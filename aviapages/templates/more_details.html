@@ -1,0 +1,23 @@
+<h1>Aircraft Details: {{ aircraft.id }}</h1>
+<h1>{{ aircraft.tail_number }}</h1>
+<p>Aircraft Type: {{ aircraft.aircraft_type }}</p>
+<p>Serial Number: {{ aircraft.serial_number }}</p>
+<p>Year of Production: {{ aircraft.year_of_production }}</p>
+<img src="{{ aircraft.photo1 }}" width="200">
+{% if aircraft.photo2 %}
+    <img src="{{ aircraft.photo2 }}" width="200">
+{% endif %}
+{% if aircraft.photo3 %}
+    <img src="{{ aircraft.photo3 }}" width="200">
+{% endif %}
+<p>Max Passengers: {{ aircraft.max_passengers }}</p>
+<p>Home Base: {{ aircraft.airport_icao }} ({{ aircraft.airport_iata }}) - {{ aircraft.airport_name }}</p>
+{% if aircraft.operator_name %}
+    <p>Operator: {{ aircraft.operator_name }}</p>
+{% endif %}
+{% if aircraft.operator_phone %}
+    <p>Phone: {{ aircraft.operator_phone }}</p>
+{% endif %}
+{% if aircraft.operator_website %}
+    <p>Website: {{ aircraft.operator_website }}</p>
+{% endif %}

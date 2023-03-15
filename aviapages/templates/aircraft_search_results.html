@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Aircraft Search Results</title>
+  </head>
+  <body>
+    <h1>Aircraft Search Results</h1>
+    {% if aircraft_list %}
+      <p>{{ aircraft_list|length }} results found:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Tail Number</th>
+            <th>Serial Number</th>
+            <th>Aircraft Type Name</th>
+            <th>Year of Production</th>
+            <th>Images</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for aircraft in aircraft_list %}
+            <tr>
+              <td>{{ aircraft.tail_number }}</td>
+              <td>{{ aircraft.serial_number }}</td>
+              <td>{{ aircraft.aircraft_type_name }}</td>
+              <td>{{ aircraft.year_of_production }}</td>
+              <td>
+                {% for image_url in aircraft.image_urls %}
+                  <img src="{{ image_url }}" width="100">
+                {% empty %}
+                  No images available.
+                {% endfor %}
+              </td>
+              <td>
+                <a href="/aircraft_detail/{{ aircraft.id }}">Detailed Information</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No results found.</p>
+    {% endif %}
+  </body>
+</html>
