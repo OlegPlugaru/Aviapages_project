@@ -33,7 +33,9 @@
                 {% endfor %}
               </td>
               <td>
-                <a href="/aircraft_detail/{{ aircraft.id }}">Detailed Information</a>
+                <a href="{% url 'aviapage_search:aircraft_details' aircraft.tail_number %}">
+                  {{ aircraft.tail_number }} - {{ aircraft.aircraft_type_name }}
+                </a>
               </td>
             </tr>
           {% endfor %}
