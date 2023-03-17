@@ -1,8 +1,10 @@
 import requests
+import os 
 
 def get_aircraft_list():
     url = 'https://dir.aviapages.com/api/aircraft/'
-    headers = {'Authorization': 'Token BN442rPF4zTfWAGQDqrZgjRWKznDfxUg9VK'}
+    api_token = os.getenv('API_KEY')
+    headers = {'Authorization': api_token}
     params = {'features': True, 'images': True}
     response = requests.get(url, headers=headers, params=params)
     #print("=====================",response.content)

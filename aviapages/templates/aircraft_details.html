@@ -5,10 +5,22 @@
 </head>
 <body>
 	<h1>Aircraft Details</h1>
-	<p>Aircraft ID: {{ aircraft.0.aircraft_id }}</p>
-	<p>Tail Number: {{ aircraft.0.tail_number }}</p>
-	<p>Aircraft Type: {{ aircraft.0.aircraft_type_name }}</p>
-	<p>Aircraft Class: {{ aircraft.0.aircraft_class_name }}</p>
-	<p>Maximum Passengers: {{ aircraft.0.max_passengers }}</p>
+	<p>Aircraft Class: {{ aircraft.aircraft_class_name }}</p>
+    <p>Company Name: {{ company.name }}</p>
+    <p>Company Phone: {{ company.phone }}</p>
+    <p>Company Website: {{ company.website }}</p>
+	  <p>Airport Name: {{ airport.name }}</p>
+		<p>Airport IATA: {{ airport.iata }}</p>
+		<p>Airport ICAO: {{ airport.icao }}</p>
+    
+
+	
+	<!-- Display images -->
+	{% if aircraft.images %}
+		{% for image in aircraft.images %}
+			<img src="{{ image.url }}" alt="{{ image.image_type }}">
+		{% endfor %}
+	{% endif %}
+	
 </body>
 </html>

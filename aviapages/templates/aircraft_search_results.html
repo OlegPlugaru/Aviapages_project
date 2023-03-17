@@ -33,7 +33,7 @@
                 {% endfor %}
               </td>
               <td>
-                <a href="{% url 'aviapage_search:aircraft_details' aircraft.tail_number %}">
+                <a href="{% url 'aviapage_search:aircraft_details' tail_number=aircraft.tail_number company_name=aircraft.company_name  %}">
                   {{ aircraft.tail_number }} - {{ aircraft.aircraft_type_name }}
                 </a>
               </td>

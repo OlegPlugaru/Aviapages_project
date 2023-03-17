@@ -11,22 +11,25 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-from .secrets import API_KEY
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+import os
+from dotenv import load_dotenv
+from django.core.management.utils import get_random_secret_key
 
+load_dotenv()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-# Aviapages API Key
-API_KEY = API_KEY
+
 # Aviapage API endpoint
 AVIAPAGES_API_ENDPOINT = 'https://dir.aviapages.com/api/v1/aircraft/'
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=l6i3r4f35(awp$pl2fdx&6+w-3^=zkbmq9x9d)ymfb6k1nrrz'
+SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
