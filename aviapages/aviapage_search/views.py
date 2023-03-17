@@ -22,13 +22,11 @@ def aircraft_search_view(request):
                 if images is not None:
                     aircraft['image_urls'] = [image['url'] for image in images[:3]]
 
-            # Select only the desired fields for each aircraft
             filtered_list = [{ 'home_base': aircraft['home_base'],'company_name':aircraft['company_name'],'tail_number': aircraft['tail_number'], 'serial_number': aircraft['serial_number'], 'aircraft_type_name': aircraft['aircraft_type_name'], 'year_of_production': aircraft['year_of_production'], 'image_urls': aircraft.get('image_urls', []) } for aircraft in filtered_list]
 
             # Limit the number of results displayed to a maximum of 300
             filtered_list = filtered_list[:300]
             
-            # Pass the list of filtered aircraft to the template
             context = {'aircraft_list': filtered_list, 'form': form}
             return render(request, 'aircraft_search_results.html', context=context)
     else:
@@ -38,12 +36,9 @@ def aircraft_search_view(request):
     return render(request, 'aircraft_search.html', context=context)
 
 
-
 def aircraft_details_view(request, tail_number, company_name=None):
     aircraft_url = f'https://dir.aviapages.com/api/aircraft/?ordering=aircraft_id&search_tail_number={tail_number}'
-    print(aircraft_url)
     company_url = f'https://dir.aviapages.com/api/companies/?ordering=company_id&search_name={company_name}'
-    print(company_url)
     api_token = os.getenv('API_KEY')
     headers = {'Authorization': api_token}
     params = {'features': True, 'images': True}
@@ -61,10 +56,8 @@ def aircraft_details_view(request, tail_number, company_name=None):
             home_base = aircraft.get('home_base')
             
             if home_base:
-                print('yes')
                 airport_url = f"https://dir.aviapages.com/api/airports/?on_date=2025-02-20T01%3A00&ordering=airport_id&search_icao={home_base}"
                 airport_response = requests.get(airport_url, headers=headers)
-                print(airport_response.content)
                 if airport_response.status_code == 200:
                     airport_list = airport_response.json()['results']
                     
